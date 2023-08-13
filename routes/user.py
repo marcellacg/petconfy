@@ -1,5 +1,5 @@
 from flask import Blueprint
-from controllers.UserController import index, register, login, home, protected, logout, perfil, agenda, admin, procurar
+from controllers.UserController import index, register, login, home, protected, logout, perfil, agenda, admin, procurar, termoslgpd
 
 user = Blueprint('user', __name__)
 
@@ -13,5 +13,6 @@ user.route('/perfil')(perfil)
 user.route('/agenda')(agenda)
 user.route('/admin')(admin)
 user.route('/admin/search', methods=['GET'])(procurar)
+user.route('/termoslgpd')(termoslgpd)
 # user.route('/<int:user_id>/edit', methods=['POST'])(update)
 # user.route('/<int:user_id>', methods=['DELETE'])(delete)

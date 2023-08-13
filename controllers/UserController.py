@@ -92,3 +92,7 @@ def perfil():
 @login_required
 def agenda():
     return render_template('agenda.html')
+
+@app.route('/termoslgpd')
+def termoslgpd():
+    return render_template('termoslgpd.html')
