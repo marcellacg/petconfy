@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8" />
+<title>Usuário</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://kit.fontawesome.com/b42168277e.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<style>
+
+  div{
+    text-align: center;
+    margin-top: 1%;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+    display: inline-block;
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+  
+  br, h4{
+    margin-top: 2%;
+  }
+
+
+ footer{
+    display: inline-block;
+    position: relative;
+    bottom: 0;
+    padding-right: 0;
+    background-color: #4CAF50;
+    width: 100%;
+    height: 150px;  
+  }
+
+  
+</style>
+</head>
+
+<body style="background-color: #f6fdf6;" >
+  <header>
+    <nav class="navbar navbar-dark bg-inverse" style="background-color:#4CAF50;">
+      <a class="navbar-brand" href="{{ url_for('home') }}">Página Inicial <i class="fa-solid fa-dog fa-sm" style="color: #f8f1f1;"></i></a>
+      <a class="navbar-brand" style="size: 15px;" href="{{ url_for('login') }}">login</a>
+      {% if current_user.id == 1 %}
+      <a class="nav-link" style="color: #f8f1f1;" href="{{ url_for('admin') }}">Admin Area</a>
+      {% endif %} 
+      {% if current_user.is_authenticated %}
+
+      <div class="btn-group dropleft">
+        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Menu
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" style="color: black;" href="{{ url_for('perfil')}}">Perfil
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+              <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+            </svg>
+          </a>
+          <a class="dropdown-item" style="color: black;" href="#">Editar perfil
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16">
+              <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/>
+            </svg>
+          </a>
+          <a class="dropdown-item" href="{{ url_for('logout') }}">Sair
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+              <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      {% endif %}
+    </nav>
+  </header>
+    <div>
+        {% if current_user.is_anonymous %}
+        {% extends 'index.html' %}
+        <br>
+        
+        {% else %}
+        <p></p>
+        Bem vindo(a)! {{current_user.nome}} {{current_user.id}}
+        <br>
+        <br>
+
+      </div>
+      
+
+  <div class="row row-cols-1 row-cols-md-3">
+    <div style="padding-right: 0.1%;" class="col mb-4">
+      <div style="background-color: #f0fff0;" class="card h-100">
+        <img src="https://images.unsplash.com/photo-1530700131180-d43d9b8cc41f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=834&q=80" class="card-img-top" alt="Serviço passeio no parque">
+        <div class="card-body">
+          <h5 class="card-title">PASSEIO NO PARQUE</h5>
+          <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore quod obcaecati debitis harum voluptatem.</p>
+          <a style="background-color:#4CAF50; border-color: #4CAF50;" href="{{ url_for('passeioparque')}}" class="btn btn-info">Cadastrar</a>
+        </div>
+      </div>
+    </div>
+    <div style="padding-right: 0.1%;" class="col mb-4">
+      <div style="background-color: #f0fff0;" class="card h-100">
+        <img src="https://images.unsplash.com/photo-1597162216923-ba6d99390c10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">DIA LEGAL</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ullam magni cumque perferendis ipsa.</p>         
+          <a style="background-color:#4CAF50; border-color: #4CAF50;"  href="#" class="btn btn-info">Cadastrar</a>     
+        </div>
+      </div>
+    </div>
+    <div style="padding-right: 0.1%;" class="col mb-4">
+      <div style="background-color: #f0fff0;" class="card h-100">
+        <img src="https://images.unsplash.com/photo-1425082661705-1834bfd09dca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=876&q=80" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">BOA NOITE COMPANHEIRO</h5>
+          <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint veniam officia animi, fugiat non dolorem.</p>
+          <a style="background-color:#4CAF50; border-color: #4CAF50;"  href="#" class="btn btn-info">Cadastrar</a>
+        </div>
+      </div>
+    </div>
+    <div style="padding-right: 0.1%;" class="col mb-4">
+      <div style="background-color: #f0fff0;" class="card h-100">
+        <img src="https://images.unsplash.com/photo-1518155317743-a8ff43ea6a5f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">À BORDO</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam aliquid fugit qui dolorem consequatur.</p>
+          <a style="background-color:#4CAF50; border-color: #4CAF50;" href="#" class="btn btn-info">Cadastrar</a>
+        </div>
+      </div>
+    </div>
+    <div style="padding-right: 0.1%;" class="col mb-4">
+      <div style="background-color: #f0fff0;" class="card h-100">
+        <img src="https://images.unsplash.com/photo-1517331156700-3c241d2b4d83?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=868&q=80" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">ÁREA MEU PET</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet esse similique tenetur molestiae officiis.</p>
+          <a style="background-color:#4CAF50; border-color: #4CAF50;" href="{{ url_for('cadastroPet')}}" class="btn btn-info">Cadastrar Pets</a>
+          <p></p>
+          <a style="background-color:#4CAF50; border-color: #4CAF50;" href="{{ url_for('getPet')}}" class="btn btn-info">Pets cadastrados</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding-right: 0.1%;" class="col mb-4">
+    <div style="background-color: #f0fff0;" class="card h-100">
+      <img src="" class="" alt="">
+      <div class="card-body">
+        <h5 class="card-title">AGENDAMENTOS</h5>
+        <a style="background-color:#4CAF50; border-color: #4CAF50;" href="{{ url_for('agenda')}}" class="btn btn-info">Calendário</a>
+  
+        <p></p>
+      </div>
+    </div> 
+  </div>
+</div>
+<br>
+  <!-- <h4 style="color: rgb(50, 50, 224); text-align: center; text-decoration: none;"><a href="#">Sair</a></h4> -->
+  <footer>
+    <div id="footer_content">
+      <br>
+      <div id="footer_contacts">
+        <i class="fa-solid fa-dog fa-xl" style="color: #f8f1f1;"> | PetConfy</i>
+      </div>
+      <hr>
+      <div id="footer_social_media">
+        <a href="#" class="footer-link" style="color: white;" id="instagram">Instagram
+          <i class="fa-brands fa-instagram"> | </i>
+      </a>
+      <a href="#" class="footer-link" style="color: white;" id="facebook">Facebook
+          <i class="fa-brands fa-facebook-f"> | </i>
+      </a>
+      <a href="" class="footer-link" style="color: white;" id="twitter">Twitter
+        <i class="fa-brands fa-twitter"> | </i>
+      </a>
+      <a href="" class="footer-link" style="color: white;" id="whatsapp">Whatsapp
+        <i class="fa-brands fa-whatsapp"> | </i>
+      </a>
+      </div>
+    </div>
+    
+  </footer>
+  {% endif %}
+  <br>
+</body>
+
+</html>
+
+<!-- <a class="dropdown-item" href="#">Perfil
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+  </svg>
+</a>
+<a class="dropdown-item" href="#">Editar perfil
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16">
+    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/>
+  </svg>
+</a> -->
